@@ -20,7 +20,7 @@ private:
     static Word GG(int j, Word X, Word Y, Word Z);
     static Word T(int j);
 public:
-    static Byte* hash(Byte* input, uint64_t inputLen);
+    static Word* hash(Byte* input, uint64_t inputLen);
 };
 
 

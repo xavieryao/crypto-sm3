@@ -6,8 +6,10 @@
 
 #define ROTATELEFT(X, n)  (((X)<<(n)) | ((X)>>(32-(n))))
 
-Byte *SM3::hash(Byte *input, uint64_t inputLen) {
-    Word state[] = {0x7380166f, 0x4914b2b9, 0x172442d7, 0xda8a0600, 0xa96f30bc, 0x163138aa, 0xe38dee4d, 0xb0fb0e4e};
+Word *SM3::hash(Byte *input, uint64_t inputLen) {
+    Word VI[] = {0x7380166f, 0x4914b2b9, 0x172442d7, 0xda8a0600, 0xa96f30bc, 0x163138aa, 0xe38dee4d, 0xb0fb0e4e};
+    Word* state = new Word[8];
+    memcpy(state, VI, 8*sizeof(VI));
     Byte buf[64];
     int inputPtr = 0;
     int bufPtr = 0;
@@ -32,7 +34,6 @@ Byte *SM3::hash(Byte *input, uint64_t inputLen) {
     while (bufPtr < 56) buf[bufPtr++] = 0;
 
     inputLen *= 8;
-    printf("inputlen: %llx\n", inputLen);
     buf[63] = static_cast<Byte>(inputLen & 0x00000000000000ff);
     buf[62] = static_cast<Byte>((inputLen & 0x000000000000ff00) >> 8);
     buf[61] = static_cast<Byte>((inputLen & 0x0000000000ff0000) >> 16);
@@ -43,19 +44,10 @@ Byte *SM3::hash(Byte *input, uint64_t inputLen) {
     buf[56] = static_cast<Byte>((inputLen & 0xff00000000000000) >> 56);
 
     CF(state, buf);
-    for (int i = 0; i < 8; ++i) {
-        printf("%x ", state[i]);
-    }
-    return nullptr;
+    return state;
 }
 
 void SM3::CF(Word *V, Byte *Bi) {
-    printf("CF\n");
-    for (int i = 0; i < 64; ++i) {
-        printf("%hhx ", Bi[i]);
-    }
-    printf("\n");
-
     auto W = std::vector<Word>(68, 0); // W
     auto WW = std::vector<Word>(64, 0); // W'
     for (int i = 0; i < 16; ++i) {
@@ -71,28 +63,12 @@ void SM3::CF(Word *V, Byte *Bi) {
     for (int i = 0; i <= 63; ++i) {
         WW[i] = W[i] ^ W[i + 4];
     }
-
-    printf("W: \n");
-    for (int i = 0; i < 68; ++i) {
-        printf("%x ", W[i]);
-    }
-    printf("\n");
-    printf("W': \n");
-    for (int i = 0; i < 64; ++i) {
-        printf("%x ", WW[i]);
-    }
-    printf("\n");
-
     constexpr int A = 0, B = 1, C = 2, D = 3, E = 4, F = 5, G = 6, H = 7;
     Word reg[8];
+
     for (int j = 0; j < 8; ++j) {
         reg[j] = V[j];
     }
-    printf("%d --- ", -1);
-    for (int i = 0; i < 8; ++i) {
-        printf("%d: %x   ", i, reg[i]);
-    }
-    printf("\n");
 
     for (int j = 0; j <= 63; ++j) {
         Word SS1, SS2, TT1, TT2;
@@ -109,11 +85,6 @@ void SM3::CF(Word *V, Byte *Bi) {
         reg[F] = reg[E];
         reg[E] = P0(TT2);
 
-        printf("%d --- ", j);
-        for (int i = 0; i < 8; ++i) {
-            printf("%d: %x   ", i, reg[i]);
-        }
-        printf("\n");
     }
     for (int i = 0; i < 8; ++i) {
         V[i] ^= reg[i];
