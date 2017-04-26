@@ -21,6 +21,8 @@ private:
     static Word T(int j);
 public:
     static Word* hash(Byte* input, uint64_t inputLen);
+    static void word2byte(Word word, Byte *byte);
+    static Word byte2word(Byte* byte);
 };
 
 

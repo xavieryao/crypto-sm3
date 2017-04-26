@@ -9,7 +9,7 @@
 Word *SM3::hash(Byte *input, uint64_t inputLen) {
     Word VI[] = {0x7380166f, 0x4914b2b9, 0x172442d7, 0xda8a0600, 0xa96f30bc, 0x163138aa, 0xe38dee4d, 0xb0fb0e4e};
     Word* state = new Word[8];
-    memcpy(state, VI, 8*sizeof(VI));
+    memcpy(state, VI, 8*sizeof(Word));
     Byte buf[64];
     int inputPtr = 0;
     int bufPtr = 0;
@@ -121,4 +121,20 @@ Word SM3::GG(int j, Word X, Word Y, Word Z) {
     } else {
         return (X & Y) | ((~X) & Z);
     }
+}
+
+void SM3::word2byte(Word word, Byte *byte) {
+    byte[3] = static_cast<Byte>(word & 0x000000ff);
+    byte[2] = static_cast<Byte>((word & 0x0000ff00) >> 8);
+    byte[1] = static_cast<Byte>((word & 0x00ff0000) >> 16);
+    byte[0] = static_cast<Byte>((word & 0xff000000) >> 24);
+}
+
+Word SM3::byte2word(Byte *byte) {
+    Word w = 0;
+    w |= ((Word) byte[0] << 24);
+    w |= ((Word) byte[1] << 16);
+    w |= ((Word) byte[2] << 8);
+    w |= ((Word) byte[3]);
+    return w;
 }
