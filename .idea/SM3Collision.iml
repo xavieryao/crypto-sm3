@@ -3,9 +3,9 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/sm3.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/SM3.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/SM3.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/sm3.h" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
@@ -74,14 +74,13 @@
           <root url="file:///System/Library/Frameworks/CoreVideo.framework/Headers" />
           <root url="file:///System/Library/Frameworks/GameKit.framework/Headers" />
           <root url="file:///System/Library/Frameworks/OpenGL.framework/Headers" />
-          <root url="file:///System/Library/Frameworks/StoreKit.framework/Headers" />
+          <root url="file:///System/Library/Frameworks/Contacts.framework/Headers" />
           <root url="file:///System/Library/Frameworks/OpenAL.framework/Headers" />
           <root url="file:///System/Library/Frameworks/CalendarStore.framework/Headers" />
           <root url="file:///System/Library/Frameworks/AVKit.framework/Headers" />
           <root url="file:///System/Library/Frameworks/FinderSync.framework/Headers" />
-          <root url="file:///System/Library/Frameworks/Contacts.framework/Headers" />
           <root url="file:///System/Library/Frameworks/WebKit.framework/Headers" />
-          <root url="file:///System/Library/Frameworks/VideoToolbox.framework/Headers" />
+          <root url="file:///System/Library/Frameworks/StoreKit.framework/Headers" />
           <root url="file:///System/Library/Frameworks/Accounts.framework/Headers" />
           <root url="file:///System/Library/Frameworks/SyncServices.framework/Headers" />
           <root url="file:///System/Library/Frameworks/AVFoundation.framework/Headers" />
@@ -156,6 +155,7 @@
           <root url="file:///System/Library/Frameworks/AGL.framework/Headers" />
           <root url="file:///System/Library/Frameworks/VideoDecodeAcceleration.framework/Headers" />
           <root url="file:///System/Library/Frameworks/ContactsUI.framework/Headers" />
+          <root url="file:///System/Library/Frameworks/VideoToolbox.framework/Headers" />
           <root url="file:///System/Library/Frameworks/NotificationCenter.framework/Headers" />
           <root url="file:///System/Library/Frameworks/Foundation.framework/Headers" />
           <root url="file:///System/Library/Frameworks/CoreLocation.framework/Headers" />
@@ -168,13 +168,13 @@
           <root url="file:///System/Library/Frameworks/JavaFrameEmbedding.framework/Headers" />
           <root url="file:///System/Library/Frameworks/CoreServices.framework/Headers" />
           <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/DictionaryServices.framework/Headers" />
-          <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/SharedFileList.framework/Headers" />
           <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/SearchKit.framework/Headers" />
-          <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Headers" />
-          <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/FSEvents.framework/Headers" />
-          <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/AE.framework/Headers" />
           <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Headers" />
+          <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/SharedFileList.framework/Headers" />
+          <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/AE.framework/Headers" />
+          <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/FSEvents.framework/Headers" />
           <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/OSServices.framework/Headers" />
+          <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Headers" />
           <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Headers" />
           <root url="file:///System/Library/Frameworks/ServiceManagement.framework/Headers" />
           <root url="file:///System/Library/Frameworks/ICADevices.framework/Headers" />
@@ -253,14 +253,13 @@
           <root url="file:///System/Library/Frameworks/CoreVideo.framework/Headers" />
           <root url="file:///System/Library/Frameworks/GameKit.framework/Headers" />
           <root url="file:///System/Library/Frameworks/OpenGL.framework/Headers" />
-          <root url="file:///System/Library/Frameworks/StoreKit.framework/Headers" />
+          <root url="file:///System/Library/Frameworks/Contacts.framework/Headers" />
           <root url="file:///System/Library/Frameworks/OpenAL.framework/Headers" />
           <root url="file:///System/Library/Frameworks/CalendarStore.framework/Headers" />
           <root url="file:///System/Library/Frameworks/AVKit.framework/Headers" />
           <root url="file:///System/Library/Frameworks/FinderSync.framework/Headers" />
-          <root url="file:///System/Library/Frameworks/Contacts.framework/Headers" />
           <root url="file:///System/Library/Frameworks/WebKit.framework/Headers" />
-          <root url="file:///System/Library/Frameworks/VideoToolbox.framework/Headers" />
+          <root url="file:///System/Library/Frameworks/StoreKit.framework/Headers" />
           <root url="file:///System/Library/Frameworks/Accounts.framework/Headers" />
           <root url="file:///System/Library/Frameworks/SyncServices.framework/Headers" />
           <root url="file:///System/Library/Frameworks/AVFoundation.framework/Headers" />
@@ -335,6 +334,7 @@
           <root url="file:///System/Library/Frameworks/AGL.framework/Headers" />
           <root url="file:///System/Library/Frameworks/VideoDecodeAcceleration.framework/Headers" />
           <root url="file:///System/Library/Frameworks/ContactsUI.framework/Headers" />
+          <root url="file:///System/Library/Frameworks/VideoToolbox.framework/Headers" />
           <root url="file:///System/Library/Frameworks/NotificationCenter.framework/Headers" />
           <root url="file:///System/Library/Frameworks/Foundation.framework/Headers" />
           <root url="file:///System/Library/Frameworks/CoreLocation.framework/Headers" />
@@ -347,13 +347,13 @@
           <root url="file:///System/Library/Frameworks/JavaFrameEmbedding.framework/Headers" />
           <root url="file:///System/Library/Frameworks/CoreServices.framework/Headers" />
           <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/DictionaryServices.framework/Headers" />
-          <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/SharedFileList.framework/Headers" />
           <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/SearchKit.framework/Headers" />
-          <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Headers" />
-          <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/FSEvents.framework/Headers" />
-          <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/AE.framework/Headers" />
           <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Headers" />
+          <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/SharedFileList.framework/Headers" />
+          <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/AE.framework/Headers" />
+          <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/FSEvents.framework/Headers" />
           <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/OSServices.framework/Headers" />
+          <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Headers" />
           <root url="file:///System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Headers" />
           <root url="file:///System/Library/Frameworks/ServiceManagement.framework/Headers" />
           <root url="file:///System/Library/Frameworks/ICADevices.framework/Headers" />

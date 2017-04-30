@@ -1,7 +1,8 @@
-#include <iostream>
-#include "SM3.h"
+#include "sm3.h"
+#include <cstring>
+#include <cstdio>
 
-bool hashEqual(Byte* hash1, Byte* hash2) {
+bool hashEqual(uint8_t * hash1, uint8_t * hash2) {
     for (int i = 0; i < 7; ++i) {
         if (hash1[i] != hash2[i]) return false;
     }
@@ -9,59 +10,73 @@ bool hashEqual(Byte* hash1, Byte* hash2) {
 }
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+
+    constexpr int CHECKPOINT = 10000000;
+
     /* use Floyd's Cycle Detection Algorithm. */
 
-    /* initialize */
-    Byte* input = new Byte[4];
-    SM3::word2byte(0x61626300, input);
-    Word* hash = SM3::hash(input, 3);
-    Byte* hash_bytes = new Byte[32];
-    for (int i = 0; i < 8; ++i) {
-        SM3::word2byte(hash[i], hash_bytes+4*i);
-    }
+    SM3_CTX ctx;
+    uint8_t out[32] = {0};
+    uint8_t msg[64] = {0x61, 0x62, 0x63, 0x64, 0x61, 0x62, 0x63, 0x64,0x61, 0x62, 0x63, 0x64, 0x61, 0x62, 0x63, 0x64,0x61, 0x62, 0x63, 0x64, 0x61, 0x62, 0x63, 0x64,0x61, 0x62, 0x63, 0x64, 0x61, 0x62, 0x63, 0x64,0x61, 0x62, 0x63, 0x64, 0x61, 0x62, 0x63, 0x64,0x61, 0x62, 0x63, 0x64, 0x61, 0x62, 0x63, 0x64,0x61, 0x62, 0x63, 0x64, 0x61, 0x62, 0x63, 0x64,0x61, 0x62, 0x63, 0x64, 0x61, 0x62, 0x63, 0x64};
+
+    SM3_Init(&ctx);
+    SM3_Update(&ctx, msg, 64);
+    SM3_Final(out, &ctx);
+
     for (int i = 0; i < 32; ++i) {
-        printf("%hhx ", hash_bytes[i]);
+        printf("%hhx ", out[i]);
     }
-    printf("\n");
 
-    /* cycle detection */
-    Byte* t = new Byte[32];
-    Byte* h = new Byte[32];
-    memcpy(t, hash_bytes, 32*sizeof(Byte));
-    memcpy(h, hash_bytes, 32* sizeof(Byte));
+    uint8_t t[32];
+    uint8_t h[32];
+    memcpy(t, out, 32*sizeof(uint8_t));
+    memcpy(h, out, 32*sizeof(uint8_t));
 
+    int i = 0;
     do {
-        /* t := t->next */
-        Word* h_t = SM3::hash(t, 32);
-        for (int i = 0; i < 8; ++i) {
-            SM3::word2byte(h_t[i], t+4*i);
-        }
-        delete h_t;
+        /*
+         * t = hash(t)
+         */
+        SM3_Init(&ctx);
+        SM3_Update(&ctx, t, 32);
+        SM3_Final(t, &ctx);
 
-        /* h:= h->next->next */
-        Word* h_h = SM3::hash(h, 32);
-        for (int i = 0; i < 8; ++i) {
-            SM3::word2byte(h_h[i], h+4*i);
-        }
-        delete h_h;
-        h_h = SM3::hash(h, 32);
-        for (int i = 0; i < 8; ++i) {
-            SM3::word2byte(h_h[i], h+4*i);
-        }
-        delete h_h;
+        /*
+         * h = hash(hash(h))
+         */
+        SM3_Init(&ctx);
+        SM3_Update(&ctx, h, 32);
+        SM3_Final(h, &ctx);
 
+        SM3_Init(&ctx);
+        SM3_Update(&ctx, h, 32);
+        SM3_Final(h, &ctx);
+
+        if (i == CHECKPOINT) {
+            printf("t: \n");
+            for (int j = 0; j < 32; ++j) {
+                printf("%hhx ", t[j]);
+            }
+            printf("\n");
+            printf("h: \n");
+            for (int j = 0; j < 32; ++j) {
+                printf("%hhx ", h[j]);
+            }
+            printf("\n");
+            i = 0;
+        }
+        i++;
     } while (!hashEqual(t, h));
 
-    printf("t:\n");
-    for (int i = 0; i < 32; ++i) {
-        printf("%hhx ", t[i]);
+    printf("collide!!\n");
+    printf("t: \n");
+    for (int j = 0; j < 32; ++j) {
+        printf("%hhx ", t[j]);
     }
     printf("\n");
-
-    printf("h:\n");
-    for (int i = 0; i < 32; ++i) {
-        printf("%hhx ", h[i]);
+    printf("h: \n");
+    for (int j = 0; j < 32; ++j) {
+        printf("%hhx ", h[j]);
     }
     printf("\n");
     return 0;
